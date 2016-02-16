@@ -21,12 +21,10 @@ Current prototype uses soundFlower to analyse internal audio playing on the comp
 
 
 **Global**
-//AudioInput    myAudio;
 AudioPlayer   myAudio;
 
 
 **Setup**
-//myAudio = minim.getLineIn(Minim.MONO);
 myAudio = minim.loadFile(“yourMusicFile”);
 
 
