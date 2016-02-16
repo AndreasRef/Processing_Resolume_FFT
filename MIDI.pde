@@ -14,11 +14,10 @@ void noteOn(int channel, int pitch, int velocity) {
   println("Channel:"+channel);
   println("Pitch:"+pitch);
   println("Velocity:"+velocity);
-  
+
   if (channel == 7 && pitch == 57 && velocity == 127) {
-   bang(); 
+    bang();
   }
-  
 }
 
 void noteOff(int channel, int pitch, int velocity) {
@@ -39,24 +38,46 @@ void controllerChange(int channel, int number, int value) {
   println("Channel:"+channel);
   println("Number:"+number);
   println("Value:"+value);
-  //Simple control messages
-  if (channel == 0 && number == 7) {
-  cp5.get("baseThreshold").setValue(int(map(value,0,127,100,1)));
+  
+  //Base MIDI Controlls
+  //Still to do: How to control radiobuttons? How to set ranges?
+  
+  
+ 
+  if (channel == 0 && number == 48) {
+    cp5.get("base").setValue(int(map(value, 0, 127, baseMin, baseMax)));
+  } else if (channel == 0 && number == 49) {
+    cp5.get("baseThreshold").setValue(int(map(value, 0, 127, 100, 1)));
+  } else if (channel == 0 && number == 50) {
+    cp5.get("baseTimerThreshold").setValue(int(map(value, 0, 127, 0, 1000)));
   } 
-  else if (channel == 1 && number == 7) {
-  cp5.get("snareThreshold").setValue(int(map(value,0,127,100,0)));
+  else if (channel == 0 && number == 51) {
+   baseClipsColumnsEffect.activate(round(map(value, 0, 127, 0, 2)));
   } 
     
-  else if (channel == 0 && number == 16) {
-  cp5.get("base").setValue(int(map(value,0,127,baseMin,baseMax)));
-  } else if (channel == 0 && number == 17) {
-  cp5.get("snare").setValue(int(map(value,0,127,snareMin,snareMax)));
-  }
-  else if (channel == 2 && number == 7) {
-  cp5.get("baseTimerThreshold").setValue(int(map(value,0,127,0,1000)));
-  }
+    else if (channel == 0 && number == 52) {
+    cp5.get("baseClipOrColumn").setValue(round(map(value, 0, 127, 1, 8)));
+  } 
   
-  else if (channel == 3 && number == 7) {
-  cp5.get("snareTimerThreshold").setValue(int(map(value,0,127,0,1000)));
-  }
+  //Snare MIDI Controlls
+  else if (channel == 0 && number == 16) {
+    cp5.get("snare").setValue(int(map(value, 0, 127, snareMin, snareMax)));
+  } else if (channel == 0 && number == 17) {
+    cp5.get("snareThreshold").setValue(int(map(value, 0, 127, 100, 1)));
+  } else if (channel == 0 && number == 18) {
+    cp5.get("snareTimerThreshold").setValue(int(map(value, 0, 127, 0, 1000)));
+  } else if (channel == 0 && number == 19) {
+   snareClipsColumnsEffect.activate(round(map(value, 0, 127, 0, 2)));
+  } 
+  
+  
+    else if (channel == 0 && number == 20) { 
+    snareOscRange.setLowValue(map(value, 0, 127, 1, snareOscRange.getHighValue()));
+  } 
+  
+    else if (channel == 0 && number == 21) {
+   snareOscRange.setHighValue(map(value, 0, 127, snareOscRange.getLowValue(), 6));
+  } 
+  
+
 }

@@ -39,16 +39,16 @@ void controlP5Setup() {
 
   Group BASEOSC = cp5.addGroup("BASEOSC")
     .setPosition(stageMargin-25, 400)
-    .setWidth(300)
+    .setSize(300, 150)
     .activateEvent(true)
     .setColorBackground(0)
     .setColorLabel(baseColor)
     .setBackgroundColor(color(255, 80))
-    .setBackgroundHeight(100)
+    //.setBackgroundHeight(100)
     .setLabel("BASE OSC Controls")
     ;
 
-  baseClipsOrColumns = cp5.addRadioButton("baseClipsOrColumns")
+  baseClipsColumnsEffect = cp5.addRadioButton("baseClipsColumnsEffect")
     .setPosition(10, 10)
     .setSize(20, 15)
     .setColorForeground(color(120))
@@ -56,6 +56,7 @@ void controlP5Setup() {
     .setColorLabel(color(255))
     .addItem("Clips", 0)
     .addItem("Columns", 1)
+    .addItem("Effect", 2)
     .setNoneSelectedAllowed(false)
     .activate(0)
     .setGroup(BASEOSC)
@@ -78,7 +79,7 @@ void controlP5Setup() {
 
 
   cp5.addSlider("baseClipOrColumn")
-    .setPosition(10, 70)
+    .setPosition(10, 75)
     .setWidth(100)
     .setRange(1, 7) // values can range from big to small as well
     .setValue(7)
@@ -102,9 +103,20 @@ void controlP5Setup() {
     ;   
 
 
+  cp5.addTextfield("BaseOscAdress")
+    .setPosition(10, 100)
+    .setSize(215, 30)
+    //.setFont()
+    .setFocus(false)
+    //.setColor(color(255,0,0))
+    //.setFont(createFont("arial",14))
+    .setLabel("OSC Effect Adress")
+    .setGroup(BASEOSC)
+    ;
+
 
   cp5.addToggle("baseOscToggle")
-    .setPosition(250, 60)
+    .setPosition(250, 110)
     .setSize(30, 20)
     .setGroup(BASEOSC)
     .setLabel("On/Off")
@@ -114,17 +126,17 @@ void controlP5Setup() {
 
   Group SNAREOSC = cp5.addGroup("SNAREOSC")
     .setPosition(width/2+25, 400)
-    .setWidth(300)
+    .setSize(300, 150)
     .activateEvent(true)
     .setColorBackground(0)
     .setColorLabel(snareColor)
     //.setColorForeground(snareColor)
     .setBackgroundColor(color(255, 80))
-    .setBackgroundHeight(100)
+    //.setBackgroundHeight(100)
     .setLabel("SNARE OSC Controls")
     ;
 
-  snareClipsOrColumns = cp5.addRadioButton("snareClipsOrColumns")
+  snareClipsColumnsEffect = cp5.addRadioButton("snareClipsColumnsEffect")
     .setPosition(10, 10)
     .setSize(20, 15)
     .setColorForeground(color(120))
@@ -132,6 +144,7 @@ void controlP5Setup() {
     .setColorLabel(color(255))
     .addItem("CLIPS", 0)
     .addItem("COLUMNS", 1)
+    .addItem("EFFECT", 2)
     .setNoneSelectedAllowed(false)
     .activate(0)
     .setGroup(SNAREOSC)
@@ -168,8 +181,8 @@ void controlP5Setup() {
   snareOscRange = cp5.addRange("range")
     // disable broadcasting since setRange and setRangeValues will trigger an event
     .setBroadcast(false) 
-    .setPosition(10, 60)
-    .setSize(130, 20)
+    .setPosition(10, 75)
+    .setSize(130, 10)
     .setHandleSize(20)
     .setRange(1, 6)
     .setDecimalPrecision(0)
@@ -177,14 +190,26 @@ void controlP5Setup() {
     .setBroadcast(true)
     .setLowValue(1)
     .setHighValue(6)
-    .snapToTickMarks(true)
-    .setColorForeground(snareColor)
-    .setColorBackground(0) 
+    //.snapToTickMarks(true)
+    //.setColorForeground(snareColor)
+    //.setColorBackground(0) 
+    .setGroup(SNAREOSC)
+    ;
+
+
+  cp5.addTextfield("SnareOscAdress")
+    .setPosition(10, 100)
+    .setSize(215, 30)
+    //.setFont()
+    .setFocus(false)
+    //.setColor(color(255,0,0))
+    //.setFont(createFont("arial",14))
+    .setLabel("OSC Effect Adress")
     .setGroup(SNAREOSC)
     ;
 
   cp5.addToggle("snareOscToggle")
-    .setPosition(250, 60)
+    .setPosition(250, 110)
     .setSize(30, 20)
     .setGroup(SNAREOSC)
     .setLabel("On/Off")
@@ -192,7 +217,7 @@ void controlP5Setup() {
 
 
   Group FFT = cp5.addGroup("FFT")
-    .setPosition(stageMargin-25, 550)
+    .setPosition(stageMargin-25, 575)
     .setWidth(300)
     .activateEvent(true)
     .setBackgroundColor(color(255, 80))
