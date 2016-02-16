@@ -20,12 +20,12 @@ Audio:
 Current prototype uses soundFlower to analyse internal audio playing on the computer. To react to sound files placed on your computers local disk simply change from AudioInput to Audioplayer and from minim.getLineIn(Minim.MONO) to minim.loadFile(“yourMusicFile”) like so
 
 
-***Global***
+*Global*
 //AudioInput    myAudio;
 AudioPlayer   myAudio;
 
 
-***Setup***
+*Setup*
 //myAudio = minim.getLineIn(Minim.MONO);
 myAudio = minim.loadFile(“yourMusicFile”);
 
