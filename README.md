@@ -24,7 +24,7 @@ AudioPlayer   myAudio;
 //AudioInput  myAudio;
 
 
-**Setup in minim.pde **
+**Setup in minim.pde**
 myAudio = minim.loadFile(“yourMusicFile”);
 //myAudio = minim.getLineIn(Minim.MONO);
 
