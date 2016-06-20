@@ -286,7 +286,7 @@ void draw() {
     } else if (i ==base && baseOscToggle==true) {
       if (baseClipsColumnsEffect.getValue() == 2 ) {
         OscMessage myMessage = new OscMessage(cp5.get(Textfield.class, "BaseOscAdress").getText());
-        myMessage.add((myAudioFFT.getAvg(snare) * myAudioAmp) * myAudioIndexAmp / 100); /* add an int to the osc message */
+        myMessage.add((myAudioFFT.getAvg(base) * myAudioAmp) * myAudioIndexAmp / 100); /* add an int to the osc message */
         oscP5.send(myMessage, myRemoteLocation);
       } 
       //If volume exceeds threshold
@@ -335,8 +335,8 @@ void draw() {
       if ((myAudioFFT.getAvg(base) * myAudioAmp) * myAudioIndexAmp < baseThreshold && baseTimer > baseTimerThreshold && baseOscToggle==true && basePeakToggle == false) { 
         if (baseTimer > baseTimerThreshold) {     
           if (baseClipsColumnsEffect.getValue() == 0) { // Trig clips (not columns)
-            for (int j=0; j<snareLayers.getArrayValue().length; j++) { //Go through all the layers
-              if ((int)snareLayers.getArrayValue()[j] == 1) { //Trig clips in the layers that are activated by baseLayers
+            for (int j=0; j<baseLayers.getArrayValue().length; j++) { //Go through all the layers
+              if ((int)baseLayers.getArrayValue()[j] == 1) { //Trig clips in the layers that are activated by baseLayers
                 if (baseSequentialOrRandom.getValue() == 0) {
                   baseClipNumber = (prevSeqNum);
                 } else if (baseSequentialOrRandom.getValue() == 1) {
