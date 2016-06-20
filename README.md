@@ -16,7 +16,7 @@ AudioPlayer   myAudio;
 //AudioInput  myAudio;
 
 
-**Setup in minim.pde **
+**Setup in minim.pde**
 myAudio = minim.loadFile(“yourMusicFile”);
 //myAudio = minim.getLineIn(Minim.MONO);
 
@@ -25,6 +25,6 @@ myAudio = minim.loadFile(“yourMusicFile”);
 Make sure you type in the complete correct adress including slashes (e.g. */composition/link1/values*). Only works with parameters that accepts floats between 0.0-1.0
 
 
-###License: 
-To come…
+###Made by: 
+Andreas Refsgaard for Circus Family 2016
 
