@@ -2,6 +2,8 @@
 Automatic VJ interface for FFT powered communication between Processing, Resolume Arena and a MIDI controller
 
 
+![alt text](https://github.com/AndreasRef/Processing_Resolume_FFT/blob/master/gifs/code_gui.gif "GIF!")
+
 ## Tested with:
 Processing 3.0.1
 Processing 3.0.2
