@@ -33,8 +33,6 @@ void controlP5Setup() {
     .setColorLabel(snareColor)
     ;
 
-  //cp5.getController("snare").setColorTickMark(#FF1212);
-
 
   cp5.addSlider("baseThreshold").setPosition(65, 100).setSize(20, 100).setColorForeground(baseColor).setColorActive(baseColor).setRange(100, 0).setValue(50).setColorLabel(baseColor);
   cp5.getController("baseThreshold").getValueLabel();
@@ -83,24 +81,6 @@ void controlP5Setup() {
     ;
 
 
-  //baseLayerClips = cp5.addRadioButton("baseLayerClips")
-  // .setPosition(250, 10)
-  // .setSize(20, 15)
-  // .setColorForeground(color(120))
-  // .setColorActive(color(255))
-  // .setColorLabel(color(255))
-  // .addItem("LAYER 3", 3)
-  // .addItem("LAYER 2", 2)
-  // .addItem("LAYER 1", 1)
-  // .setNoneSelectedAllowed(false)
-  // .activate(0)
-  // .setGroup(BASEOSC)
-  // ;   
-
-
-
-
-
   baseLayers = cp5.addCheckBox("baseLayers")
     .setPosition(250, 10)
     .setSize(20, 15)
@@ -128,37 +108,10 @@ void controlP5Setup() {
     // after the initialization we turn broadcast back on again
     .setBroadcast(true)
     .setLowValue(1)
-    .setHighValue(6)
-    //.snapToTickMarks(true)
-    //.setColorForeground(snareColor)
-    //.setColorBackground(0) 
+    .setHighValue(6) 
     .setGroup(BASEOSC)
     ;
 
-
-  //cp5.addSlider("baseClipOrColumn")
-  //  .setPosition(10, 75)
-  //  .setWidth(215)
-  //  .setRange(1, 7) // values can range from big to small as well
-  //  .setValue(7)
-  //  .setNumberOfTickMarks(7)
-  //  .setSliderMode(Slider.FLEXIBLE)
-  //  .setGroup(BASEOSC)
-  //  .setLabel("Clip/Column")
-  //  ;
-
-  //baseOverUnder = cp5.addRadioButton("baseOverUnder")
-  // .setPosition(110, 10)
-  // .setSize(20, 15)
-  // .setColorForeground(color(120))
-  // .setColorActive(color(255))
-  // .setColorLabel(color(255))
-  // .addItem("silenceTrig", 0)
-  // .addItem("peakTrig", 1)
-  // .setNoneSelectedAllowed(false)
-  // .activate(0)
-  // .setGroup(BASEOSC)
-  // ;   
 
 
   baseSequentialOrRandom = cp5.addRadioButton("baseSequentialOrRandom")
@@ -180,10 +133,7 @@ void controlP5Setup() {
   cp5.addTextfield("BaseOscAdress")
     .setPosition(10, 110)
     .setSize(215, 30)
-    //.setFont()
     .setFocus(false)
-    //.setColor(color(255,0,0))
-    //.setFont(createFont("arial",14))
     .setLabel("OSC Effect Adress")
     .setGroup(BASEOSC)
     ;
@@ -273,7 +223,7 @@ void controlP5Setup() {
     ;
 
 
-  snareOscRange = cp5.addRange("range")
+  snareOscRange = cp5.addRange("snareRange")
     // disable broadcasting since setRange and setRangeValues will trigger an event
     .setBroadcast(false) 
     .setPosition(10, 85)
@@ -430,12 +380,12 @@ void controlEvent(ControlEvent theEvent) {
   }
 
 
-  if (theEvent.isFrom("range")) {
+  if (theEvent.isFrom("snareRange")) {
     // min and max values are stored in an array.
     // access this array with controller().arrayValue(). min is at index 0, max is at index 1.
 
-    minRange = int(theEvent.getController().getArrayValue(0));
-    maxRange = int(theEvent.getController().getArrayValue(1));
+    snareMinRange = int(theEvent.getController().getArrayValue(0));
+    snareMaxRange = int(theEvent.getController().getArrayValue(1));
   }
   
   

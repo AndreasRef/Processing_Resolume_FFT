@@ -112,11 +112,10 @@ int snareThreshold;
 
 //Clip/column for the base to trigg
 int baseClipOrColumn;
-int sliderTicks2;
 
 //Variables for range of clips/columns being triggered 
-int minRange = 1;
-int maxRange = 7;
+int snareMinRange = 1;
+int snareMaxRange = 7;
 
 int baseMinRange = 1;
 int baseMaxRange = 7;
@@ -131,7 +130,7 @@ int prevSeqNum=1;
 
 
 //Experiments 
-int clipNumber;
+int snareClipNumber;
 int baseClipNumber;
 
 int snarePianoClip;
@@ -205,34 +204,34 @@ void draw() {
             for (int j=0; j<snareLayers.getArrayValue().length; j++) { //Go through all the layers
               if ((int)snareLayers.getArrayValue()[j] == 1) { //Trig clips in the layers that are activated by snareLayers
                 if (sequentialOrRandom.getValue() == 0) {
-                  clipNumber = sequentialOrder(prevSeqNum);
+                  snareClipNumber = sequentialOrder(prevSeqNum);
                 } else if (sequentialOrRandom.getValue() == 1) {
-                  clipNumber = randomNoDublicates(minRange, maxRange, prevRandNum);
+                  snareClipNumber = randomNoDublicates(snareMinRange, snareMaxRange, prevRandNum);
                 } 
-                OscMessage myMessage = new OscMessage("/layer" + (3 - j) + "/clip" + clipNumber + "/connect");
+                OscMessage myMessage = new OscMessage("/layer" + (3 - j) + "/clip" + snareClipNumber + "/connect");
                 myMessage.add(1); /* add an int to the osc message */
                 oscP5.send(myMessage, myRemoteLocation);
               }
             }
             prevSeqNum++;
-            if (prevSeqNum > maxRange) {
-              prevSeqNum = minRange;
+            if (prevSeqNum > snareMaxRange) {
+              prevSeqNum = snareMinRange;
             }
           } else if (snareClipsColumnsEffect.getValue() == 1 ) { //Trig entire columns
 
             if (sequentialOrRandom.getValue() == 0) {
-              clipNumber = sequentialOrder(prevSeqNum);
+              snareClipNumber = sequentialOrder(prevSeqNum);
             } else if (sequentialOrRandom.getValue() == 1) {
-              clipNumber = randomNoDublicates(minRange, maxRange, prevRandNum);
+              snareClipNumber = randomNoDublicates(snareMinRange, snareMaxRange, prevRandNum);
             } 
 
-            OscMessage myMessage = new OscMessage("/track" +  clipNumber + "/connect");
+            OscMessage myMessage = new OscMessage("/track" +  snareClipNumber + "/connect");
             myMessage.add(1); /* add an int to the osc message */
             oscP5.send(myMessage, myRemoteLocation);
             prevSeqNum++;
 
-            if (prevSeqNum > maxRange) {
-              prevSeqNum = minRange;
+            if (prevSeqNum > snareMaxRange) {
+              prevSeqNum = snareMinRange;
             }
           }
         }
@@ -247,34 +246,34 @@ void draw() {
             for (int j=0; j<snareLayers.getArrayValue().length; j++) { //Go through all the layers
               if ((int)snareLayers.getArrayValue()[j] == 1) { //Trig clips in the layers that are activated by snareLayers
                 if (sequentialOrRandom.getValue() == 0) {
-                  clipNumber = sequentialOrder(prevSeqNum);
+                  snareClipNumber = sequentialOrder(prevSeqNum);
                 } else if (sequentialOrRandom.getValue() == 1) {
-                  clipNumber = randomNoDublicates(minRange, maxRange, prevRandNum);
+                  snareClipNumber = randomNoDublicates(snareMinRange, snareMaxRange, prevRandNum);
                 } 
-                OscMessage myMessage = new OscMessage("/layer" + (3 - j) + "/clip" + clipNumber + "/connect");
+                OscMessage myMessage = new OscMessage("/layer" + (3 - j) + "/clip" + snareClipNumber + "/connect");
                 myMessage.add(1); /* add an int to the osc message */
                 oscP5.send(myMessage, myRemoteLocation);
               }
             }
             prevSeqNum++;
-            if (prevSeqNum > maxRange) {
-              prevSeqNum = minRange;
+            if (prevSeqNum > snareMaxRange) {
+              prevSeqNum = snareMinRange;
             }
           } else if (snareClipsColumnsEffect.getValue() == 1 ) { //Trig entire columns
 
             if (sequentialOrRandom.getValue() == 0) {
-              clipNumber = sequentialOrder(prevSeqNum);
+              snareClipNumber = sequentialOrder(prevSeqNum);
             } else if (sequentialOrRandom.getValue() == 1) {
-              clipNumber = randomNoDublicates(minRange, maxRange, prevRandNum);
+              snareClipNumber = randomNoDublicates(snareMinRange, snareMaxRange, prevRandNum);
             } 
 
-            OscMessage myMessage = new OscMessage("/track" +  clipNumber + "/connect");
+            OscMessage myMessage = new OscMessage("/track" +  snareClipNumber + "/connect");
             myMessage.add(1); /* add an int to the osc message */
             oscP5.send(myMessage, myRemoteLocation);
             prevSeqNum++;
 
-            if (prevSeqNum > maxRange) {
-              prevSeqNum = minRange;
+            if (prevSeqNum > snareMaxRange) {
+              prevSeqNum = snareMinRange;
             }
           }
         }
@@ -285,7 +284,7 @@ void draw() {
 
       //BASE
     } else if (i ==base && baseOscToggle==true) {
-      if (snareClipsColumnsEffect.getValue() == 2 ) {
+      if (baseClipsColumnsEffect.getValue() == 2 ) {
         OscMessage myMessage = new OscMessage(cp5.get(Textfield.class, "BaseOscAdress").getText());
         myMessage.add((myAudioFFT.getAvg(snare) * myAudioAmp) * myAudioIndexAmp / 100); /* add an int to the osc message */
         oscP5.send(myMessage, myRemoteLocation);
@@ -341,7 +340,7 @@ void draw() {
                 if (baseSequentialOrRandom.getValue() == 0) {
                   baseClipNumber = (prevSeqNum);
                 } else if (baseSequentialOrRandom.getValue() == 1) {
-                  baseClipNumber = randomNoDublicates(minRange, maxRange, prevRandNum);
+                  baseClipNumber = randomNoDublicates(baseMinRange, baseMaxRange, prevRandNum);
                 } 
                 OscMessage myMessage = new OscMessage("/layer" + (3 - j) + "/clip" + baseClipNumber + "/connect");
                 myMessage.add(1); /* add an int to the osc message */
@@ -349,15 +348,15 @@ void draw() {
               }
             }
             prevSeqNum++;
-            if (prevSeqNum > maxRange) {
-              prevSeqNum = minRange;
+            if (prevSeqNum > baseMaxRange) {
+              prevSeqNum = baseMinRange;
             }
           } else if (baseClipsColumnsEffect.getValue() == 1 ) { //Trig entire columns
 
             if (baseSequentialOrRandom.getValue() == 0) {
               baseClipNumber = sequentialOrder(prevSeqNum);
             } else if (baseSequentialOrRandom.getValue() == 1) {
-              baseClipNumber = randomNoDublicates(minRange, maxRange, prevRandNum);
+              baseClipNumber = randomNoDublicates(baseMinRange, baseMaxRange, prevRandNum);
             } 
 
             OscMessage myMessage = new OscMessage("/track" +  baseClipNumber + "/connect");
@@ -365,8 +364,8 @@ void draw() {
             oscP5.send(myMessage, myRemoteLocation);
             prevSeqNum++;
 
-            if (prevSeqNum > maxRange) {
-              prevSeqNum = minRange;
+            if (prevSeqNum > baseMaxRange) {
+              prevSeqNum = baseMinRange;
             }
           }
         }
