@@ -84,7 +84,6 @@ RadioButton baseOverUnder;
 CheckBox snareLayers;
 CheckBox baseLayers;
 
-
 Range snareOscRange;
 
 Range baseOscRange;
@@ -105,7 +104,6 @@ int snareTimer = 0;
 int snareLastTimer = 0;
 int snareTimerThreshold;
 
-//int pianoTrig_ms = 500;
 
 //Threshold variables
 int baseThreshold;
